@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkInitiatives — Intercom Kickoff Intake Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:       #E10600;
+    --red-dim:   #B30500;
+    --navy:      #2A3547;
+    --navy-dim:  #1e2837;
+    --dark:      #0F1318;
+    --body:      #1F2937;
+    --muted:     #64748B;
+    --border:    #DDE3EA;
+    --shade:     #F4F6F8;
+    --white:     #FFFFFF;
+    --input-bg:  #FAFBFC;
+    --focus:     rgba(225,6,0,0.15);
+    --radius:    6px;
+    --mono:      'DM Mono', monospace;
+    --sans:      'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--shade);
+    color: var(--body);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── Top bar ─────────────────────────────────────────────────────────── */
+  .topbar {
+    background: var(--dark);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .topbar-brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .topbar-brand span {
+    color: var(--red);
+    margin-right: 8px;
+  }
+
+  .topbar-right {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #5a6a7a;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── Progress bar ────────────────────────────────────────────────────── */
+  .progress-wrap {
+    background: var(--dark);
+    padding: 0 40px 16px;
+    position: sticky;
+    top: 56px;
+    z-index: 99;
+  }
+
+  .progress-track {
+    height: 2px;
+    background: #2a3547;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--red);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #5a6a7a;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .hero-inner { max-width: 760px; }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-client {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+
+  .hero-rule {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .hero-meta-item label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: #5a6a7a;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .hero-meta-item p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+  }
+
+  /* ── How to use banner ───────────────────────────────────────────────── */
+  .how-to {
+    background: var(--white);
+    border-left: 3px solid var(--red);
+    margin: 32px auto;
+    max-width: 840px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .how-to-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .how-to-text p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .how-to-text p + p { margin-top: 6px; }
+
+  .how-to-text strong { color: var(--body); font-weight: 600; }
+
+  /* ── Layout ──────────────────────────────────────────────────────────── */
+  .page { max-width: 840px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ── Section ─────────────────────────────────────────────────────────── */
+  .section {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(1)  { animation-delay: 0.05s; }
+  .section:nth-child(2)  { animation-delay: 0.10s; }
+  .section:nth-child(3)  { animation-delay: 0.15s; }
+  .section:nth-child(4)  { animation-delay: 0.20s; }
+  .section:nth-child(5)  { animation-delay: 0.25s; }
+  .section:nth-child(6)  { animation-delay: 0.30s; }
+  .section:nth-child(7)  { animation-delay: 0.35s; }
+  .section:nth-child(8)  { animation-delay: 0.40s; }
+  .section:nth-child(9)  { animation-delay: 0.45s; }
+
+  .section-header {
+    padding: 18px 24px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    background: rgba(225,6,0,0.12);
+    padding: 3px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .section-body { padding: 24px; }
+
+  .section-note {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  /* ── Field rows ──────────────────────────────────────────────────────── */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .field-row.full { grid-template-columns: 1fr; }
+  .field-row.thirds { grid-template-columns: 1fr 1fr 1fr; }
+
+  @media (max-width: 600px) {
+    .field-row, .field-row.thirds { grid-template-columns: 1fr; }
+  }
+
+  /* ── Field group ─────────────────────────────────────────────────────── */
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+
+  .field-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--body);
+    letter-spacing: 0.01em;
+  }
+
+  .field-group label .req {
+    color: var(--red);
+    margin-left: 2px;
+  }
+
+  .field-group input,
+  .field-group textarea,
+  .field-group select {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    color: var(--body);
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    width: 100%;
+    resize: vertical;
+  }
+
+  .field-group input::placeholder,
+  .field-group textarea::placeholder {
+    color: #b0bec5;
+    font-style: italic;
+  }
+
+  .field-group input:focus,
+  .field-group textarea:focus,
+  .field-group select:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px var(--focus);
+    background: var(--white);
+  }
+
+  .field-group input.filled,
+  .field-group textarea.filled,
+  .field-group select.filled {
+    border-color: #c8d6e0;
+    background: var(--white);
+  }
+
+  .field-group textarea { min-height: 80px; }
+  .field-group textarea.tall { min-height: 110px; }
+
+  /* ── Procedure card ──────────────────────────────────────────────────── */
+  .proc-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .proc-card:last-child { margin-bottom: 0; }
+
+  .proc-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--shade);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .proc-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    text-transform: uppercase;
+    background: rgba(225,6,0,0.08);
+    padding: 3px 7px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .proc-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .proc-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    padding: 12px 18px 0;
+    line-height: 1.55;
+  }
+
+  .proc-fields { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* ── Contacts table-style ─────────────────────────────────────────────── */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 120px;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .contacts-grid { grid-template-columns: 1fr; }
+  }
+
+  .cg-header {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 9px 12px;
+    font-weight: 500;
+  }
+
+  .cg-label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--body);
+    background: var(--shade);
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+
+  .cg-input {
+    padding: 6px 8px;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  .cg-input input {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--body);
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 4px 4px;
+  }
+
+  .cg-input input::placeholder { color: #b0bec5; font-style: italic; }
+
+  /* ── Milestones table ────────────────────────────────────────────────── */
+  .milestones-grid {
+    display: grid;
+    grid-template-columns: 1fr 160px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  @media (max-width: 560px) {
+    .milestones-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── OOS confirm ─────────────────────────────────────────────────────── */
+  .oos-confirm {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--shade);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+
+  .oos-confirm input[type="checkbox"] {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--red);
+    cursor: pointer;
+    margin-top: 2px;
+  }
+
+  .oos-confirm label {
+    font-size: 13.5px;
+    color: var(--body);
+    cursor: pointer;
+    line-height: 1.55;
+  }
+
+  /* ── Submit bar ──────────────────────────────────────────────────────── */
+  .submit-bar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .submit-info { flex: 1; min-width: 220px; }
+
+  .submit-info p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .submit-info strong { color: var(--body); }
+
+  .btn-submit {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--red);
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .btn-submit:hover { background: var(--red-dim); }
+  .btn-submit:active { transform: scale(0.98); }
+
+  .btn-submit:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── Validation message ──────────────────────────────────────────────── */
+  .validation-msg {
+    display: none;
+    background: #fff3f3;
+    border: 1px solid #fca5a5;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #b91c1c;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .validation-msg.show { display: block; }
+
+  /* ── Footer ──────────────────────────────────────────────────────────── */
+  .form-footer {
+    text-align: center;
+    padding: 16px 0 40px;
+  }
+
+  .form-footer p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #a0aec0;
+    text-transform: uppercase;
+  }
+
+  /* ── Required field highlight ────────────────────────────────────────── */
+  .field-group input.error,
+  .field-group textarea.error {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px var(--focus);
+  }
+
+  /* ── Success overlay ─────────────────────────────────────────────────── */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,19,24,0.85);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-overlay.show { display: flex; }
+
+  .success-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 40px 48px;
+    max-width: 460px;
+    width: calc(100% - 40px);
+    text-align: center;
+    border-top: 4px solid var(--red);
+    animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.88) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .success-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .success-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .success-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .success-card p strong { color: var(--body); }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-brand"><span>●</span> Sabel Customer Success Solutions</div>
+  <div class="topbar-right">Confidential</div>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0% complete</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Kickoff Intake Form</div>
+    <div class="hero-title">Intercom Implementation</div>
+    <div class="hero-client">WorkInitiatives</div>
+    <hr class="hero-rule">
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <label>Prepared by</label>
+        <p>Sabel Customer Success Solutions</p>
+      </div>
+      <div class="hero-meta-item">
+        <label>Project start</label>
+        <p>1 April 2026</p>
+      </div>
+      <div class="hero-meta-item">
+        <label>Est. time to complete</label>
+        <p>30 to 45 minutes</p>
+      </div>
+      <div class="hero-meta-item">
+        <label>Return to</label>
+        <p>Your Sabel contact</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- How to use -->
+  <div class="how-to">
+    <div class="how-to-icon">📋</div>
+    <div class="how-to-text">
+      <p><strong>Complete each section as fully as you can.</strong> If you are unsure of an answer, leave a note and we will cover it in our first check-in. You do not need to complete the form in one sitting — your answers are preserved in the browser until you submit.</p>
+      <p>When you click <strong>Submit</strong>, your email app will open with all answers pre-filled. Simply hit Send. Your Sabel contact will receive everything and confirm receipt.</p>
+    </div>
+  </div>
+
+  <form id="kickoffForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+
+    <!-- ── S1: Project contacts ──────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title">Project contacts</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">Please provide the details of everyone involved in this project. We will use these to make sure the right people receive the right communications.</p>
+
+        <div class="contacts-grid">
+          <div class="cg-header">Role</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Name</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Email</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Notes</div>
+
+          <div class="cg-label">Project decision-maker</div>
+          <div class="cg-input"><input type="text" name="c_dm_name" placeholder="Full name"></div>
+          <div class="cg-input"><input type="email" name="c_dm_email" placeholder="email@company.com"></div>
+          <div class="cg-input"><input type="text" name="c_dm_notes" placeholder="Notes"></div>
+
+          <div class="cg-label">Day-to-day owner (Kobe)</div>
+          <div class="cg-input"><input type="text" name="c_oo_name" placeholder="Full name" value="Kobe"></div>
+          <div class="cg-input"><input type="email" name="c_oo_email" placeholder="email@company.com"></div>
+          <div class="cg-input"><input type="text" name="c_oo_notes" placeholder="Notes"></div>
+
+          <div class="cg-label">Technical contact</div>
+          <div class="cg-input"><input type="text" name="c_tc_name" placeholder="Full name"></div>
+          <div class="cg-input"><input type="email" name="c_tc_email" placeholder="email@company.com"></div>
+          <div class="cg-input"><input type="text" name="c_tc_notes" placeholder="Notes"></div>
+
+          <div class="cg-label">Fin content approver</div>
+          <div class="cg-input"><input type="text" name="c_fa_name" placeholder="Full name"></div>
+          <div class="cg-input"><input type="email" name="c_fa_email" placeholder="email@company.com"></div>
+          <div class="cg-input"><input type="text" name="c_fa_notes" placeholder="Notes"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S2: Access ────────────────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title">Access and permissions</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">We need access to these systems before the build can begin. Please confirm who to contact to arrange each one, or note if it is already sorted.</p>
+
+        <div class="contacts-grid" style="grid-template-columns: 140px 1fr 1fr 140px;">
+          <div class="cg-header">System</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Access needed</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Contact to arrange</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Status</div>
+
+          <div class="cg-label">Intercom</div>
+          <div class="cg-input" style="border-left:1px solid var(--border)">
+            <input type="text" value="Admin access for Sabel (richard@sabelcss.com)" readonly style="color:var(--muted);font-style:italic;font-size:12px;">
+          </div>
+          <div class="cg-input"><input type="text" name="acc_intercom_contact" placeholder="Name / email"></div>
+          <div class="cg-input"><input type="text" name="acc_intercom_status" placeholder="e.g. Done, In progress"></div>
+
+          <div class="cg-label">Slack</div>
+          <div class="cg-input" style="border-left:1px solid var(--border)">
+            <input type="text" value="Webhook URL for Procedure 04 bug escalation" readonly style="color:var(--muted);font-style:italic;font-size:12px;">
+          </div>
+          <div class="cg-input"><input type="text" name="acc_slack_contact" placeholder="Name / email"></div>
+          <div class="cg-input"><input type="text" name="acc_slack_status" placeholder="e.g. Done, In progress"></div>
+
+          <div class="cg-label">Go High Level</div>
+          <div class="cg-input" style="border-left:1px solid var(--border)">
+            <input type="text" value="Booking link URL for Procedure 01 callback flow" readonly style="color:var(--muted);font-style:italic;font-size:12px;">
+          </div>
+          <div class="cg-input"><input type="text" name="acc_ghl_contact" placeholder="Name / email"></div>
+          <div class="cg-input"><input type="text" name="acc_ghl_status" placeholder="e.g. Done, In progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S3: Key dates ─────────────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title">Key dates and milestones</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">The dates below are based on the agreed delivery schedule. Please confirm they are correct or note any changes in the Notes column.</p>
+
+        <div class="milestones-grid">
+          <div class="cg-header">Milestone</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Target date</div>
+          <div class="cg-header" style="border-left:1px solid rgba(255,255,255,0.1)">Notes / changes</div>
+
+          <div class="cg-label">Project kickoff</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="1 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_kickoff_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Fin knowledge confirmed</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="4 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_fin_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Procedures 01 + 02 signed off</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="4 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_p12_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Procedures 03 + 04 signed off</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="11 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_p34_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Inbox routing live</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="11 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_routing_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Fin launched (CAPS trial)</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="11 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_finlive_notes" placeholder="Confirmed / change to..."></div>
+
+          <div class="cg-label">Project completion</div>
+          <div class="cg-input" style="border-left:1px solid var(--border);display:flex;align-items:center;"><input type="text" value="15 April 2026" readonly style="color:var(--muted);font-size:12.5px;"></div>
+          <div class="cg-input"><input type="text" name="ms_complete_notes" placeholder="Confirmed / change to..."></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S4: Out of scope ──────────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title">Out of scope confirmation</div>
+      </div>
+      <div class="section-body">
+        <p style="font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:12px;">The following items are explicitly outside this engagement as agreed in the signed proposal: <strong>Help Centre article creation or rewriting; custom API integrations beyond the Slack webhook in Procedure 04; ongoing retainer support; team training beyond standard handover; configuration of any third-party tools other than Go High Level and Slack.</strong></p>
+        <p style="font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:4px;">Any work outside the agreed scope will be scoped and priced as a separate add-on before work begins.</p>
+
+        <div class="oos-confirm">
+          <input type="checkbox" id="oosCheck" name="oos_confirmed">
+          <label for="oosCheck">I confirm I have read and understood what is out of scope for this engagement.</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S5: Fin AI ────────────────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-title">Fin AI — Knowledge and Policy</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">Fin needs accurate knowledge and clear policy boundaries before it goes live. Please provide as much detail as you can — we will refine the rest together.</p>
+
+        <div class="field-row full">
+          <div class="field-group">
+            <label>Knowledge sources <span class="req">*</span></label>
+            <textarea name="fin_knowledge" class="tall" placeholder="List your Help Centre URL(s), any PDFs, internal docs, or other sources you want Fin to draw on. One per line is fine."></textarea>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Topics Fin should handle autonomously</label>
+            <textarea name="fin_handle" placeholder="e.g. general FAQs, refund eligibility checks, name changes, bug reporting..."></textarea>
+          </div>
+          <div class="field-group">
+            <label>Topics Fin must always hand off to a human</label>
+            <textarea name="fin_handoff" placeholder="e.g. billing disputes over $X, legal queries, complaints..."></textarea>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Sensitive topics Fin must avoid or flag</label>
+            <textarea name="fin_sensitive" placeholder="e.g. competitor mentions, pricing negotiations, legal threats..."></textarea>
+          </div>
+          <div class="field-group">
+            <label>Refund threshold</label>
+            <input type="text" name="fin_refund_threshold" placeholder="e.g. Fin can offer a credit up to $50 without approval">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Job ad credit value</label>
+            <input type="text" name="fin_credit_value" placeholder="e.g. Standard credit is $30 equivalent in ad spend">
+          </div>
+          <div class="field-group">
+            <label>Fin tone and persona</label>
+            <input type="text" name="fin_persona" placeholder="e.g. Friendly and concise, professional, matches brand voice">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Fin content approver — name</label>
+            <input type="text" name="fin_approver_name" placeholder="Full name">
+          </div>
+          <div class="field-group">
+            <label>Fin content approver — email</label>
+            <input type="email" name="fin_approver_email" placeholder="email@company.com">
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="field-group">
+            <label>Any other policy boundaries</label>
+            <textarea name="fin_other_policy" placeholder="Anything else Fin should know before going live..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S6: Procedures ────────────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <div class="section-title">Automation Procedures</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">We are building four Fin procedures. Your answers here drive the procedure logic — the more detail you can give us, the less back-and-forth before sign-off.</p>
+
+        <!-- P01 -->
+        <div class="proc-card">
+          <div class="proc-header">
+            <div class="proc-num">Procedure 01</div>
+            <div class="proc-name">Phone and Callback Booking</div>
+          </div>
+          <p class="proc-desc">Fin presents the Go High Level booking link when a customer asks to speak with someone or requests a callback.</p>
+          <div class="proc-fields">
+            <div class="field-group">
+              <label>Go High Level booking link URL <span class="req">*</span></label>
+              <input type="url" name="p01_ghl_url" placeholder="https://...">
+            </div>
+            <div class="field-group">
+              <label>Trigger phrases (words or phrases that should activate this procedure)</label>
+              <input type="text" name="p01_triggers" placeholder='e.g. "call me", "speak to someone", "phone number", "call back"'>
+            </div>
+            <div class="field-group">
+              <label>What should Fin do if the booking link is unavailable or broken?</label>
+              <input type="text" name="p01_fallback" placeholder="e.g. Apologise and ask the customer to email support@...">
+            </div>
+          </div>
+        </div>
+
+        <!-- P02 -->
+        <div class="proc-card">
+          <div class="proc-header">
+            <div class="proc-num">Procedure 02</div>
+            <div class="proc-name">Refund Handling with Agent-in-the-Loop</div>
+          </div>
+          <p class="proc-desc">Fin triages the reason, offers a job ad credit where appropriate, and pauses for agent approval before any action is taken.</p>
+          <div class="proc-fields">
+            <div class="field-group">
+              <label>Main reasons a customer might request a refund</label>
+              <textarea name="p02_refund_reasons" placeholder="e.g. Ad didn't perform, posted by mistake, duplicate charge, technical issue..."></textarea>
+            </div>
+            <div class="field-group">
+              <label>When should Fin offer a job ad credit instead of a refund?</label>
+              <input type="text" name="p02_credit_logic" placeholder="e.g. Always offer credit first, or only if the reason is ad performance">
+            </div>
+            <div class="field-group">
+              <label>Which agent reviews and approves refund actions?</label>
+              <input type="text" name="p02_approver" placeholder="Name / role / inbox">
+            </div>
+            <div class="field-group">
+              <label>What happens if the agent does not respond within a set time?</label>
+              <input type="text" name="p02_timeout" placeholder="e.g. Escalate to a manager, send a follow-up, reassign to a different inbox">
+            </div>
+          </div>
+        </div>
+
+        <!-- P03 -->
+        <div class="proc-card">
+          <div class="proc-header">
+            <div class="proc-num">Procedure 03</div>
+            <div class="proc-name">Company Name Change</div>
+          </div>
+          <p class="proc-desc">Fin asks for the current and new name, checks whether a job ad was posted in the last 24 hours, and guides the customer through the correct outcome.</p>
+          <div class="proc-fields">
+            <div class="field-group">
+              <label>What should Fin tell the customer if a job ad was posted in the last 24 hours?</label>
+              <textarea name="p03_if_recent" placeholder="e.g. Name changes within 24 hours of posting are free — Fin should proceed and confirm the change..."></textarea>
+            </div>
+            <div class="field-group">
+              <label>What should Fin do if no job ad was posted in the last 24 hours?</label>
+              <textarea name="p03_if_old" placeholder="e.g. A charge applies — Fin should explain the fee and ask the customer to confirm before proceeding..."></textarea>
+            </div>
+            <div class="field-group">
+              <label>Any exceptions or edge cases we should account for</label>
+              <input type="text" name="p03_exceptions" placeholder="e.g. Premium accounts get one free change per year, certain plan types are exempt...">
+            </div>
+          </div>
+        </div>
+
+        <!-- P04 -->
+        <div class="proc-card">
+          <div class="proc-header">
+            <div class="proc-num">Procedure 04</div>
+            <div class="proc-name">Bug and Error Capture with Slack Escalation</div>
+          </div>
+          <p class="proc-desc">Fin captures error details and fires a Slack notification so the right team is alerted immediately, including outside business hours.</p>
+          <div class="proc-fields">
+            <div class="field-row">
+              <div class="field-group">
+                <label>Slack channel name <span class="req">*</span></label>
+                <input type="text" name="p04_slack_channel" placeholder="e.g. #bugs, #support-escalations">
+              </div>
+              <div class="field-group">
+                <label>Who to tag in Slack</label>
+                <input type="text" name="p04_slack_tag" placeholder="e.g. @channel, @dev-team, @jane.smith">
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Types of errors to capture <span class="req">*</span></label>
+              <textarea name="p04_error_types" placeholder="e.g. Download failures, 500 errors, login issues, payment errors, broken links..."></textarea>
+            </div>
+            <div class="field-group">
+              <label>Should Fin ask for a screenshot in all cases, or only for specific errors?</label>
+              <input type="text" name="p04_screenshot" placeholder="e.g. Always, or only for 500 errors and download failures">
+            </div>
+            <div class="field-group">
+              <label>What should Fin say to the customer while the team investigates?</label>
+              <textarea name="p04_customer_msg" placeholder="e.g. Thanks for reporting this. Our tech team has been notified and will look into it within 2 hours..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S7: Inbox and routing ──────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <div class="section-title">Inbox and Routing</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">We are rebuilding your inbox structure and routing so conversations land in the right place automatically. The more we understand your current setup, the faster we can build the right structure.</p>
+
+        <div class="field-row full">
+          <div class="field-group">
+            <label>List all inboxes or queues you want to keep <span class="req">*</span></label>
+            <textarea name="inbox_list" class="tall" placeholder="e.g.&#10;General enquiries&#10;Billing and refunds&#10;Technical support&#10;Job ad issues"></textarea>
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="field-group">
+            <label>What types of conversations go to each inbox?</label>
+            <textarea name="inbox_routing" class="tall" placeholder="Describe how you currently sort or would like to sort conversations into each inbox..."></textarea>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>How are conversations assigned?</label>
+            <select name="inbox_assignment">
+              <option value="">Select...</option>
+              <option>Round-robin (automatic, even distribution)</option>
+              <option>Load-balanced (fewest open conversations)</option>
+              <option>Manual (agents pick up their own)</option>
+              <option>Mix — depends on the inbox</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Business hours (days, times, timezone)</label>
+            <input type="text" name="inbox_hours" placeholder="e.g. Mon–Fri 9am–5pm AEST">
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="field-group">
+            <label>Team assignments — which agents/teams handle which inboxes?</label>
+            <textarea name="inbox_teams" placeholder="e.g. Kobe and James handle General; Sarah handles Billing..."></textarea>
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="field-group">
+            <label>Out-of-hours handling</label>
+            <textarea name="inbox_oos" placeholder="What should happen to conversations that arrive when no one is available? (Note: Fin will handle weekend traffic based on the after-hours workflow we configure)"></textarea>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Any VIP accounts or priority routing rules?</label>
+            <input type="text" name="inbox_vip" placeholder="e.g. Enterprise accounts route directly to Sarah">
+          </div>
+          <div class="field-group">
+            <label>Existing tags or attributes we should carry across?</label>
+            <input type="text" name="inbox_tags" placeholder="e.g. Urgent, Premium, Trial, Bug">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── S8: Additional notes ──────────────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <div class="section-title">Additional notes</div>
+      </div>
+      <div class="section-body">
+        <p class="section-note">Anything not covered above — other tools we should know about, edge cases, team context, or questions for us.</p>
+        <div class="field-group">
+          <textarea name="additional_notes" class="tall" placeholder="Add anything else here..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Validation msg ────────────────────────────────────────────── -->
+    <div class="validation-msg" id="validationMsg"></div>
+
+    <!-- ── Submit bar ────────────────────────────────────────────────── -->
+    <div class="submit-bar">
+      <div class="submit-info">
+        <p><strong>Ready to submit?</strong> Your answers will be sent securely to the Sabel team. You will see a confirmation on this page once submitted.</p>
+        <p style="margin-top:6px;">Responses go directly to <strong>Sabel Customer Success Solutions</strong> — nobody else.</p>
+      </div>
+      <button type="submit" class="btn-submit" id="submitBtn">Submit form →</button>
+    </div>
+
+    <!-- Formspree hidden fields -->
+    <input type="hidden" name="_subject" value="WorkInitiatives — Intercom Kickoff Intake Form">
+    <input type="hidden" name="_replyto" value="">
+    <input type="hidden" name="_next" value="">
+
+  </form>
+
+  <div class="form-footer">
+    <p>Perfect Made Possible · Sabel Customer Success Solutions · sabelcustomersuccess.com</p>
+  </div>
+</div>
+
+<!-- Success state (shown after Formspree confirms) -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <span class="success-icon">✅</span>
+    <h2>Form submitted — thank you</h2>
+    <p>Your answers have been sent to the Sabel team. We will review everything and be in touch shortly.</p>
+    <p style="margin-top:12px;font-size:12.5px;">If you have anything to add, reply to the confirmation email you should receive shortly, or contact your Sabel project contact directly.</p>
+  </div>
+</div>
+
+<script>
+// ── Progress tracking ─────────────────────────────────────────────────────────
+function updateProgress() {
+  var inputs = document.querySelectorAll('input:not([readonly]):not([type="checkbox"]), textarea, select');
+  var filled = 0;
+  inputs.forEach(function(el) {
+    if (el.value && el.value.trim() !== '') filled++;
+  });
+  var pct = Math.round((filled / inputs.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '% complete';
+}
+
+document.addEventListener('input', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+    e.target.classList.toggle('filled', e.target.value.trim() !== '');
+    updateProgress();
+  }
+});
+
+// ── Validation ────────────────────────────────────────────────────────────────
+function validate() {
+  var required = [
+    { name: 'fin_knowledge',     label: 'Fin knowledge sources (Section 05)' },
+    { name: 'p01_ghl_url',      label: 'Go High Level booking URL (Procedure 01)' },
+    { name: 'p04_slack_channel', label: 'Slack channel name (Procedure 04)' },
+    { name: 'p04_error_types',  label: 'Error types to capture (Procedure 04)' },
+    { name: 'inbox_list',       label: 'Inbox list (Section 07)' },
+  ];
+
+  var errors = [];
+  required.forEach(function(f) {
+    var el = document.querySelector('[name="' + f.name + '"]');
+    if (!el || !el.value.trim()) {
+      if (el) el.classList.add('error');
+      errors.push(f.label);
+    } else {
+      if (el) el.classList.remove('error');
+    }
+  });
+
+  if (!document.getElementById('oosCheck').checked) {
+    errors.push('Out of scope confirmation (Section 04)');
+  }
+
+  return errors;
+}
+
+// ── Formspree AJAX submit ─────────────────────────────────────────────────────
+document.getElementById('kickoffForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var errors  = validate();
+  var msgEl   = document.getElementById('validationMsg');
+  var btn     = document.getElementById('submitBtn');
+
+  if (errors.length > 0) {
+    msgEl.innerHTML = '<strong>Please complete the following required fields before submitting:</strong><br>• ' + errors.join('<br>• ');
+    msgEl.classList.add('show');
+    msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  msgEl.classList.remove('show');
+  btn.disabled    = true;
+  btn.textContent = 'Submitting…';
+
+  var form = this;
+  var data = new FormData(form);
+
+  fetch(form.action, {
+    method:  'POST',
+    body:    data,
+    headers: { 'Accept': 'application/json' },
+  })
+  .then(function(response) {
+    if (response.ok) {
+      document.getElementById('successOverlay').classList.add('show');
+      form.reset();
+      document.getElementById('progressFill').style.width = '0%';
+      document.getElementById('progressLabel').textContent = '0% complete';
+      btn.textContent = 'Submitted ✓';
+    } else {
+      return response.json().then(function(data) {
+        throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Submission failed');
+      });
+    }
+  })
+  .catch(function(err) {
+    btn.disabled    = false;
+    btn.textContent = 'Submit form →';
+    msgEl.innerHTML = '<strong>Submission failed.</strong> Please check your connection and try again. Error: ' + err.message;
+    msgEl.classList.add('show');
+  });
+});
+
+// ── Dismiss success overlay on click ─────────────────────────────────────────
+document.getElementById('successOverlay').addEventListener('click', function() {
+  this.classList.remove('show');
+});
+
+// ── Input error clearing ──────────────────────────────────────────────────────
+document.querySelectorAll('input, textarea').forEach(function(el) {
+  el.addEventListener('input', function() { this.classList.remove('error'); });
+});
+
+// Init
+updateProgress();
+</script>
+</body>
+</html>
