@@ -40,11 +40,7 @@ var _React = React,
   useMemo = _React.useMemo,
   useEffect = _React.useEffect,
   useRef = _React.useRef;
-
-// ─── Config ───────────────────────────────────────────────────────────────────
 var API = "https://sabel-webhook.vercel.app/api/tracker";
-
-// ─── Brand tokens ─────────────────────────────────────────────────────────────
 var C = {
   bg: "#0B0B0C",
   card: "#0F1113",
@@ -141,8 +137,6 @@ var PHASES = {
     l: "POST GO-LIVE — STABILISATION"
   }
 };
-
-// ─── Timeline geometry ────────────────────────────────────────────────────────
 var TL_START = new Date("2026-03-02");
 var TL_END = new Date("2026-05-04");
 var TL_DAYS = (TL_END - TL_START) / 864e5;
@@ -173,8 +167,6 @@ var todayStr = TODAY.toLocaleDateString("en-GB", {
   month: "short",
   year: "numeric"
 });
-
-// ─── Default data ─────────────────────────────────────────────────────────────
 var _uid = 100;
 var uid = function uid() {
   return "t".concat(++_uid);
@@ -221,7 +213,7 @@ var INIT = [{
     co: "",
     start: "2026-03-06",
     end: "2026-03-06",
-    status: "Dependency",
+    status: "Complete",
     notes: "",
     dep: true,
     link: "https://www.intercom.com/help/en/articles/183-set-up-identity-verification-for-web-and-mobile"
@@ -265,10 +257,10 @@ var INIT = [{
     id: "f1",
     task: "Workspace setup — identity, brand, region, seat allocation",
     owner: "Chris",
-    co: "",
+    co: "Spartans",
     start: "2026-03-09",
     end: "2026-03-13",
-    status: "Pending",
+    status: "Complete",
     notes: "",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/168-install-intercom-in-your-product-for-logged-in-users"
@@ -279,7 +271,7 @@ var INIT = [{
     co: "",
     start: "2026-03-09",
     end: "2026-03-13",
-    status: "Pending",
+    status: "Complete",
     notes: "",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/167-install-intercom-in-your-product-for-visitors-and-leads"
@@ -290,7 +282,7 @@ var INIT = [{
     co: "",
     start: "2026-03-09",
     end: "2026-03-13",
-    status: "Pending",
+    status: "Complete",
     notes: "",
     dep: false,
     link: ""
@@ -301,18 +293,18 @@ var INIT = [{
     co: "",
     start: "2026-03-09",
     end: "2026-03-13",
-    status: "Pending",
-    notes: "",
+    status: "Blocked",
+    notes: "No SLA's - may be a future addition",
     dep: false,
     link: ""
   }, {
     id: "f5",
     task: "Conversation attributes and data fields defined",
     owner: "Chris",
-    co: "Richard",
+    co: "Spartans",
     start: "2026-03-09",
     end: "2026-03-13",
-    status: "Pending",
+    status: "Blocked",
     notes: "",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/179-send-custom-user-attributes-to-intercom"
@@ -323,7 +315,7 @@ var INIT = [{
     co: "",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
+    status: "Complete",
     notes: "",
     dep: false,
     link: ""
@@ -334,19 +326,19 @@ var INIT = [{
     co: "",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
-    notes: "",
+    status: "Complete",
+    notes: "dependencies being attributes available for report building",
     dep: false,
     link: ""
   }, {
     id: "f8",
     task: "Help Centre structure — collections, sections, hierarchy",
     owner: "Chris",
-    co: "",
+    co: "Spartans",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
-    notes: "",
+    status: "In Progress",
+    notes: "WIP - awaiting documents from Spartans",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/56644-customize-your-help-center"
   }, {
@@ -356,7 +348,7 @@ var INIT = [{
     co: "",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
+    status: "In Progress",
     notes: "",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/56644-customize-your-help-center"
@@ -367,7 +359,7 @@ var INIT = [{
     co: "",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
+    status: "In Progress",
     notes: "",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/2982784-control-who-can-see-your-articles"
@@ -379,7 +371,7 @@ var INIT = [{
     start: "2026-03-13",
     end: "2026-03-13",
     status: "Dependency",
-    notes: "",
+    notes: "Aside from VIP, these is completed — VIP queue/escalation still being defined by Spartans",
     dep: true,
     link: ""
   }, {
@@ -389,7 +381,7 @@ var INIT = [{
     co: "",
     start: "2026-03-13",
     end: "2026-03-13",
-    status: "Dependency",
+    status: "Blocked",
     notes: "",
     dep: true,
     link: ""
@@ -400,7 +392,7 @@ var INIT = [{
     co: "",
     start: "2026-03-13",
     end: "2026-03-13",
-    status: "Dependency",
+    status: "Blocked",
     notes: "",
     dep: true,
     link: ""
@@ -425,8 +417,8 @@ var INIT = [{
     co: "",
     start: "2026-03-16",
     end: "2026-03-20",
-    status: "Pending",
-    notes: "",
+    status: "In Progress",
+    notes: "Added guidance based on current knowledge",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/9357948-manage-knowledge-audiences-and-targeting"
   }, {
@@ -469,7 +461,7 @@ var INIT = [{
     co: "",
     start: "2026-03-23",
     end: "2026-03-27",
-    status: "Pending",
+    status: "In Progress",
     notes: "Use case TBC at kickoff",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/6298285-using-custom-actions-in-automation"
@@ -480,7 +472,7 @@ var INIT = [{
     co: "",
     start: "2026-03-23",
     end: "2026-03-27",
-    status: "Pending",
+    status: "In Progress",
     notes: "Use case TBC at kickoff",
     dep: false,
     link: "https://www.intercom.com/help/en/articles/6298285-using-custom-actions-in-automation"
@@ -770,8 +762,6 @@ var INIT = [{
     link: "https://www.intercom.com/help/en/articles/3107405-add-translations-to-public-articles"
   }]
 }];
-
-// ─── SVG logo ─────────────────────────────────────────────────────────────────
 var SabelLogo = function SabelLogo(_ref) {
   var _ref$h = _ref.h,
     h = _ref$h === void 0 ? 32 : _ref$h;
@@ -814,8 +804,6 @@ var MONO = {
 var SANS = {
   fontFamily: "'Helvetica Neue',Helvetica,Arial,sans-serif"
 };
-
-// ─── Save status indicator ────────────────────────────────────────────────────
 function SaveStatus(_ref2) {
   var status = _ref2.status;
   var cfg = {
@@ -853,8 +841,6 @@ function SaveStatus(_ref2) {
     })
   }, cfg.label);
 }
-
-// ─── Atoms ────────────────────────────────────────────────────────────────────
 function OwnerBadge(_ref3) {
   var owner = _ref3.owner,
     onClick = _ref3.onClick,
@@ -1018,8 +1004,6 @@ function LinkIcon(_ref6) {
     }
   }, "\u2197");
 }
-
-// ─── Main ─────────────────────────────────────────────────────────────────────
 function App() {
   var _useState3 = useState(INIT),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -1055,8 +1039,6 @@ function App() {
     setSaveStatus = _useState16[1];
   var saveTimer = useRef(null);
   var isFirstLoad = useRef(true);
-
-  // ── Load from API on mount ────────────────────────────────────────────────
   useEffect(function () {
     fetch(API).then(function (r) {
       return r.json();
@@ -1069,8 +1051,6 @@ function App() {
       setSaveStatus("idle");
     });
   }, []);
-
-  // ── Save to API whenever phases change (debounced 1.2s) ──────────────────
   useEffect(function () {
     if (isFirstLoad.current) {
       isFirstLoad.current = false;
@@ -1101,8 +1081,6 @@ function App() {
       });
     }, 1200);
   }, [phases]);
-
-  // mutations
   var updTask = useCallback(function (id, patch) {
     return setPhases(function (p) {
       return p.map(function (ph) {
@@ -1376,9 +1354,9 @@ function App() {
     borderBottom: "1px solid ".concat(C.border, "18"),
     verticalAlign: "middle"
   };
-  var LW = 200;
-  var ROW_H = 26;
-  var PH_H = 28;
+  var LW = 200,
+    ROW_H = 26,
+    PH_H = 28;
   var TodayLine = function TodayLine() {
     return /*#__PURE__*/React.createElement("div", {
       style: {
@@ -1396,10 +1374,10 @@ function App() {
   };
   var GanttBar = function GanttBar(_ref10) {
     var task = _ref10.task;
-    var o = OWNERS[task.owner] || OWNERS.Chris;
-    var lp = dateToX(task.start);
-    var wp = dateSpan(task.start, task.end);
-    var pt = task.start === task.end;
+    var o = OWNERS[task.owner] || OWNERS.Chris,
+      lp = dateToX(task.start),
+      wp = dateSpan(task.start, task.end),
+      pt = task.start === task.end;
     if (task.dep) return /*#__PURE__*/React.createElement("div", {
       title: "".concat(task.task, " \u2014 ").concat(fmtDate(task.start)),
       style: {
@@ -1551,9 +1529,9 @@ function App() {
         whiteSpace: "nowrap"
       })
     }, "\u25BC ", todayStr)))), phases.map(function (phase) {
-      var m = PHASES[phase.id];
-      var col = tlCol.has(phase.id);
-      var vis = phase.tasks.filter(taskVis);
+      var m = PHASES[phase.id],
+        col = tlCol.has(phase.id),
+        vis = phase.tasks.filter(taskVis);
       if (!vis.length) return null;
       var nonDep = vis.filter(function (t) {
         return !t.dep;
@@ -1561,11 +1539,11 @@ function App() {
       var span = null;
       if (nonDep.length) {
         var s0 = nonDep.reduce(function (a, t) {
-          return t.start < a ? t.start : a;
-        }, nonDep[0].start);
-        var e0 = nonDep.reduce(function (a, t) {
-          return t.end > a ? t.end : a;
-        }, nonDep[0].end);
+            return t.start < a ? t.start : a;
+          }, nonDep[0].start),
+          e0 = nonDep.reduce(function (a, t) {
+            return t.end > a ? t.end : a;
+          }, nonDep[0].end);
         span = {
           l: dateToX(s0),
           w: dateSpan(s0, e0)
@@ -2467,7 +2445,6 @@ function App() {
     })
   }, "sabelcustomersuccess.com")));
 }
-
 ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
   </script>
 </body>
